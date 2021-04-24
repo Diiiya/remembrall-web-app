@@ -1,0 +1,40 @@
+.headerDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.headerTitle {
+  color: whitesmoke;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-family: "Brush Script MT", cursive;
+  font-size: 30px;
+}
+
+.body {
+  height: 700px;
+  font-family: Verdana, sans-serif;
+  background: linear-gradient(
+    180deg,
+    rgba(67, 206, 162, 1) 0%,
+    rgba(24, 90, 157, 1) 100%
+  );
+}
+
+.footerDiv {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.footerText {
+  color: whitesmoke;
+  font-weight: bold;
+  text-transform: capitalize;
+}
