@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function useToken() {
-    const getToken = () => {
-        const tokenString = localStorage.getItem('token');
-        const userToken = JSON.parse(tokenString);
-        return userToken?.token
-    };
-    const [token, setToken] = useState(getToken());
+  const getToken = () => {
+    const tokenString = localStorage.getItem("token");
+    return tokenString;
+  };
 
-    const saveToken = userToken => {
-        localStorage.setItem('token', JSON.stringify(userToken));
-        setToken(userToken.token);
-    };
+  const [token, setToken] = useState(getToken());
+  const isJWTToken = new RegExp(
+    "^[A-Za-z0-9\\-_=]+\\.[A-Za-z0-9\\-_=]+(\\.[A-Za-z0-9\\-_.+/=]+)?$"
+  );
 
-    return {
-        setToken: saveToken,
-        token
+  async function saveToken(userToken) {
+    console.log("comes here");
+    if (isJWTToken.test(userToken)) {
+      localStorage.setItem("token", userToken);
+      setToken(userToken);
+      return true;
     }
+    return false;
+  }
+
+  return {
+    setToken: saveToken,
+    token,
+  };
 }

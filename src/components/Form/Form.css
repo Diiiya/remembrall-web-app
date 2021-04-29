@@ -25,10 +25,18 @@
   text-decoration: none;
   color: #28606a;
   font-weight: bold;
+  background: transparent;
+  border: none !important;
+  cursor: pointer;
 }
 
 .textField {
   width: 100%;
+}
+
+.errorMsg {
+  color: darkred;
+  font-size: 10px;
 }
 
 .button {
