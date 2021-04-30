@@ -7,9 +7,21 @@ export default function SignupFields(props) {
   const { setUserName, setEmail, setPassword } = props;
   const [localPassword, setLocalPassword] = useState("");
 
+  const [usernameErrorMsg, setUsernameErrorMsg] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
   const [confirmPasswordErrorMsg, setConfirmPasswordErrorMsg] = useState("");
+
+  const validateUsername = (username) => {
+    const validUsername = new RegExp("^(?:.*[A-Za-z0-9])$");
+    const isValid = validUsername.test(username);
+    if (!isValid) {
+      setUsernameErrorMsg("The username can only contain letters and numbers");
+    } else {
+      setUsernameErrorMsg("");
+      setUserName(username);
+    }
+  };
 
   const validateEmail = (email) => {
     const validEmail = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
@@ -54,8 +66,9 @@ export default function SignupFields(props) {
         required
         label="Username"
         className="textField"
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={(e) => validateUsername(e.target.value)}
       />
+      <div className="errorMsg">{usernameErrorMsg}</div>
       <TextField
         id="standard-required"
         required
