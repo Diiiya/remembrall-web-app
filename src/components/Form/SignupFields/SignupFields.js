@@ -17,6 +17,10 @@ export default function SignupFields(props) {
     const isValid = validUsername.test(username);
     if (!isValid) {
       setUsernameErrorMsg("The username can only contain letters and numbers");
+    } else if (username.length < 3 || username.length > 30) {
+      setUsernameErrorMsg(
+        "Username should contain between 3 and 30 characters!"
+      );
     } else {
       setUsernameErrorMsg("");
       setUserName(username);
@@ -41,7 +45,11 @@ export default function SignupFields(props) {
     const isValid = validPassword.test(password);
     if (!isValid) {
       setPasswordErrorMsg(
-        "Password should contain at least one letter and one number at be at least 6 characters long!"
+        "Password should contain at least one letter and one number!"
+      );
+    } else if (password.length < 6 || password.length > 60) {
+      setPasswordErrorMsg(
+        "Password should contain between 6 and 60 characters!"
       );
     } else {
       setPasswordErrorMsg("");

@@ -28,6 +28,7 @@ export default function Form(props) {
     handleSubmit,
     setUserName,
     setEmail,
+    setLogin,
     setPassword,
     setFormType,
     setResponseMsg,
@@ -39,9 +40,7 @@ export default function Form(props) {
   let localType;
 
   if (type === "login") {
-    fields = (
-      <LoginFields setUserName={setUserName} setPassword={setPassword} />
-    );
+    fields = <LoginFields setLogin={setLogin} setPassword={setPassword} />;
     localType = "signup";
   } else {
     fields = (
