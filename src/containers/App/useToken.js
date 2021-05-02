@@ -7,22 +7,29 @@ export default function useToken() {
   };
 
   const [token, setToken] = useState(getToken());
+
   const isJWTToken = new RegExp(
     "^[A-Za-z0-9\\-_=]+\\.[A-Za-z0-9\\-_=]+(\\.[A-Za-z0-9\\-_.+/=]+)?$"
   );
 
   async function saveToken(userToken) {
-    console.log("comes here");
-    if (isJWTToken.test(userToken)) {
-      localStorage.setItem("token", userToken);
-      setToken(userToken);
+    var tokenValue = userToken.createdToken;
+    if (isJWTToken.test(tokenValue)) {
+      localStorage.setItem("token", tokenValue);
+      setToken(userToken.createdToken);
       return true;
     }
     return false;
   }
 
+  const removeToken = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
   return {
     setToken: saveToken,
     token,
+    removeToken,
   };
 }
