@@ -17,14 +17,6 @@
   font-size: 30px;
 }
 
-.headerUserMenu {
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  cursor: pointer;
-}
-
 .avatar {
   padding-left: 10px;
   width: 40px;
