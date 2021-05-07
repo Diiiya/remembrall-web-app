@@ -11,3 +11,32 @@ export function requestGetUser(userId, token) {
     },
   });
 }
+
+export function requestCreateUser(username, email, password) {
+  console.log("Request:: ", username, email, password);
+  return axios.request({
+    method: "post",
+    url: "https://localhost:5001/users",
+    headers: {
+    //  "Accept": "application/json",
+    //   "Content-Type": "application/json"
+    Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    data: {username, email, password}
+  })
+}
+
+export function requestLoginUser(login, password) {
+  return axios.request({
+    method: "post",
+    url: "https://localhost:5001/users/authenticate",
+    headers: {
+    //  "Accept": "application/json",
+    //   "Content-Type": "application/json"
+    Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    data: {login, password}
+  })
+}

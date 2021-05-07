@@ -1,27 +1,40 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./redux/actions";
+import { userSelector } from './redux/selectors';
 
-function Dashboard({ token }) {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+function Dashboard({ token, getUserAction, user }) {
 
-  console.log(">> ", user);
 
   useEffect(() => {
-    dispatch(getUser(user?.userId, token));
-  }, [dispatch]);
+    let decrypted = JSON.parse(atob(token.split('.')[1]));
+    let userId = decrypted.nameid;
+    if (userId) {
+      getUserAction(userId, token);
+    }  
+      
+  }, [])
 
   return (
     <div>
       <header>
         <h2>Dashboard</h2>
-        <div>Hey{user?.username}</div>
+        <div>Hey {user?.username}</div>
       </header>
     </div>
   );
 }
 
-export default withRouter(Dashboard);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getUserAction: getUser,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  user: userSelector(state) ? userSelector(state) : '',
+});
+
+const withRedux = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withRedux(Dashboard));

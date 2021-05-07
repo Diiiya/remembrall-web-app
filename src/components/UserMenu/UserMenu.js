@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,6 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import EditIcon from "@material-ui/icons/Edit";
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import { getUser } from "../../containers/Dashboard/redux/actions";
 
@@ -15,6 +16,7 @@ import "./UserMenu.css";
 import catImg from "../../resources/images/cat.jpg";
 
 export default function UserMenu({ removeToken, token }) {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -76,7 +78,13 @@ export default function UserMenu({ removeToken, token }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem onClick={() => history.push("/dashboard")}>
+          <ListItemIcon style={{ minWidth: "40px" }}>
+            <DashboardIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => history.push("/settings")}>
           <ListItemIcon style={{ minWidth: "40px" }}>
             <EditIcon fontSize="small" />
           </ListItemIcon>

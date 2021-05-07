@@ -37,7 +37,7 @@ export default function Login({ setToken }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [formType, setFormType] = useState("login");
-  const [responseMsg, setResponseMsg] = useState("");
+  const [responseMsg, setResponseMsg] = useState("");  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLoginSubmit = async (e) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter,
+  Router,
   Redirect,
   Route,
   Switch,
@@ -11,6 +11,7 @@ import UserMenu from "../../components/UserMenu/index";
 import ProtectedRoute from "../../components/ProtectedRoute/index";
 import Login from "../Login/index";
 import Dashboard from "../Dashboard/index";
+import Settings from "../Settings/index";
 import useToken from "./useToken";
 
 import "fontsource-roboto";
@@ -36,7 +37,7 @@ function App() {
         {showUserMenu()}
       </div>
       <div className="wrapper">
-        <BrowserRouter>
+        <Router history={history}>
           <Switch>
             {/* Public routes */}
             <Redirect from="/" to="/login" exact />
@@ -51,11 +52,17 @@ function App() {
               component={Dashboard}
               token={token}
             />
+            <ProtectedRoute
+              path="/settings"
+              exact
+              component={Settings}
+              token={token}
+            />
 
             {/* All other routes */}
             <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
-        </BrowserRouter>
+        </Router>
       </div>
       <div className="footerDiv">
         <div className="footerText"> Footer </div>
