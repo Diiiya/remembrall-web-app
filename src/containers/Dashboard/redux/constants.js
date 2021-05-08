@@ -1,2 +1,10 @@
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
+
+export const UPDATE_USER = "UPDATE_USER";
+export const USER_UPDATED_SUCCESS = "USER_UPDATED_SUCCESS";
+export const USER_UPDATED_ERROR = "USER_UPDATED_ERROR";
+
+export const DELETE_USER = "DELETE_USER";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
