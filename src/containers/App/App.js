@@ -57,6 +57,7 @@ function App() {
               exact
               component={Settings}
               token={token}
+              removeToken={removeToken}
             />
 
             {/* All other routes */}

@@ -11,7 +11,7 @@ export default function ProtectedRoute({
       {...rest}
       render={(props) => {
         if (token) {
-          return <Component token={token} />;
+          return <Component token={token} {...rest} />;
         } else {
           return (
             <Redirect

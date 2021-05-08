@@ -20,3 +20,31 @@
      return user;
    }
  );
+
+  /**
+  *  Update User result selector
+  */
+   export const userUpdateSelector = createSelector(
+    selectUserDomain,
+   (substate) => {
+     const type = get(substate, 'type');
+     if (type === "USER_UPDATED_SUCCESS") {
+       return true;
+     }
+     return false;
+   }
+ );
+
+   /**
+  *  Delete User result selector
+  */
+    export const userDeleteSelector = createSelector(
+      selectUserDomain,
+     (substate) => {
+       const type = get(substate, 'type');
+       if (type === "DELETE_USER_SUCCESS") {
+         return true;
+       }
+       return false;
+     }
+   );

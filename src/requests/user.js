@@ -13,7 +13,6 @@ export function requestGetUser(userId, token) {
 }
 
 export function requestCreateUser(username, email, password) {
-  console.log("Request:: ", username, email, password);
   return axios.request({
     method: "post",
     url: "https://localhost:5001/users",
@@ -38,5 +37,40 @@ export function requestLoginUser(login, password) {
       'X-Requested-With': 'XMLHttpRequest',
     },
     data: {login, password}
+  })
+}
+
+export function requestUpdateUser(userId, token, email, currentPassword, newPassword) {
+  let updateData;
+  if (newPassword !== ""){
+    updateData = {email, currentPassword, newPassword}
+  } else {
+    updateData = {email, currentPassword}
+  }
+  return axios.request({
+    method: "put",
+    url: `https://localhost:5001/users/${userId}`,
+    headers: {
+    //  "Accept": "application/json",
+    //   "Content-Type": "application/json"
+    Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      Authorization: "Bearer " + token
+    },
+    data: updateData
+  })
+}
+
+export function requestDeleteUser(userId, token) {
+  return axios.request({
+    method: "delete",
+    url: `https://localhost:5001/users/${userId}`,
+    headers: {
+    //  "Accept": "application/json",
+    //   "Content-Type": "application/json"
+    Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      Authorization: "Bearer " + token
+    },
   })
 }
