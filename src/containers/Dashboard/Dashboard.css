@@ -1,0 +1,122 @@
+.gridDashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-wrap: nowrap;
+    align-content: space-between;
+}
+
+.gridDashboard > div {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 650px;
+    padding: 20px;
+}
+
+.allTasks {
+    font-size: 25px;
+    font-family: 'Roboto';
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskDiv {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    border-style: solid;
+    border-width: thin;
+    border-color: rgba(255, 255, 255, 0.5);;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.taskDivIncompleted {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.taskDivCompleted {
+    background-color: rgba(255, 255, 255, 0.3);
+    color:gray;
+}
+
+/* the elements: time, priority, location, will be spaced */
+.taskDiv > div {
+    margin-right: 15px;
+}
+
+.tagDiv {
+    background-color: black;
+    height: 100%;
+    width: 15px;
+    border-radius: 10px;
+    margin-left: -1px;
+    color: transparent;
+}
+
+.circle {
+    height: 25px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: 600;
+    padding-top: 4px;
+}
+
+.inactiveCircle {
+    background-color: #bbb;
+}
+
+.highPriorityCircle {
+    background-color: #e90040;
+}
+
+.mediumPriorityCircle {
+    background-color: #e88a01;
+}
+
+.lowPriorityCircle {
+    background-color: #d8d051;
+}
+
+.taskDoneCircle {
+    background-color: #00BF00;
+}
+
+.time {
+    width: 10%;
+    text-align: center;
+}
+
+.date {
+    width: 10%;
+    text-align: center;
+}
+
+.taskDescription {
+    font-weight: bold;
+    width: 50%;
+}
+
+.location {
+    width: 15%;
+    text-align: center;
+}
+
+.doneIcon {
+    width: 10%;
+    text-align: center;
+}
+
+.taskDoneDescription {
+    text-decoration: line-through;
+}

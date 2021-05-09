@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Router,
   Redirect,
@@ -14,6 +14,14 @@ import Dashboard from "../Dashboard/index";
 import Settings from "../Settings/index";
 import useToken from "./useToken";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import "fontsource-roboto";
 import "./App.css";
 
@@ -21,7 +29,6 @@ function App() {
   const history = useHistory();
   const { token, setToken, removeToken } = useToken();
 
-  // For app menu > https://material-ui.com/components/drawers/
   const showUserMenu = () => {
     if (token) {
       history.push("/dashboard");
@@ -30,13 +37,78 @@ function App() {
     return null;
   };
 
+  const useStyles = makeStyles({
+    list: {
+      width: 250,
+      // top: "50px", // not in consideration
+    },
+  });
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsOpen(open);
+  };
+
+  const classes = useStyles();
+  const list = () => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}      
+    >
+      <List>
+        <ListItem button key={"All tasks"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Today"} />
+        </ListItem>
+        <ListItem button key={"All tasks"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"This week"} />
+        </ListItem>
+        <ListItem button key={"All tasks"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"This month"} />
+        </ListItem>
+      </List>
+      <ListItem button key={"All tasks"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"This year"} />
+      </ListItem>
+      <ListItem button key={"All tasks"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"All"} />
+      </ListItem>
+    </div>
+  );
+
   return (
     <div className="body">
       <div className="headerDiv">
-        <div className="headerTitle"> Remembrall </div>
+        <div className="headerTitle" onClick={toggleDrawer(true)}> Remembrall </div>
+        <Drawer open={isOpen} onClose={toggleDrawer(false)}>
+          {list()}
+        </Drawer>
         {showUserMenu()}
       </div>
-      <div className="wrapper">
+      <div className="wrapper">        
         <Router history={history}>
           <Switch>
             {/* Public routes */}

@@ -17,8 +17,6 @@ export function requestCreateUser(username, email, password) {
     method: "post",
     url: "https://localhost:5001/users",
     headers: {
-    //  "Accept": "application/json",
-    //   "Content-Type": "application/json"
     Accept: 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
     },
@@ -31,10 +29,8 @@ export function requestLoginUser(login, password) {
     method: "post",
     url: "https://localhost:5001/users/authenticate",
     headers: {
-    //  "Accept": "application/json",
-    //   "Content-Type": "application/json"
     Accept: 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
+    'X-Requested-With': 'XMLHttpRequest',
     },
     data: {login, password}
   })
@@ -51,9 +47,7 @@ export function requestUpdateUser(userId, token, email, currentPassword, newPass
     method: "put",
     url: `https://localhost:5001/users/${userId}`,
     headers: {
-    //  "Accept": "application/json",
-    //   "Content-Type": "application/json"
-    Accept: 'application/json',
+      Accept: 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       Authorization: "Bearer " + token
     },
