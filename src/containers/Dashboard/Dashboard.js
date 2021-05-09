@@ -9,13 +9,114 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import DoneIcon from '@material-ui/icons/Done';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import TextField from "@material-ui/core/TextField";
 
-import { getUser, getUserTodos } from "./redux/actions";
+import { getUser, getUserTodos, createTodo } from "./redux/actions";
 import { userSelector, userTodosSelector } from './redux/selectors';
 
 import './Dashboard.css';
 
-function Dashboard({ token, getUserAction, getUserTodosAction, userTodos, user }) {
+function SimpleDialog(props) {
+  const { onClose, user, open, createTodoAction } = props;
+
+  const useStyles = makeStyles(() => ({
+    primaryButton: {
+      background: "#28606A",
+      "&:hover": {
+        background: "rgba(40, 96, 106, 0.5)",
+      },
+      color: "white",
+      borderRadius: "15px",
+      width: "150px",
+      height: "40px"
+    },
+  }));
+
+  const classes = useStyles();
+  const [description, setDescription] = useState("");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [priority, setPriority] = useState("");
+  const [tag, setTag] = useState("");
+
+  // const handleClose = () => {
+  //   onClose(selectedValue);
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const todo = { description, date, time, location, priority, tag };
+    console.log("ALL:: ", description, date, time, location, priority, tag);
+    console.log("UserId::", user?.id);
+    createTodoAction(user?.id, description, date, time, location, priority, tag);
+  };
+
+  return (
+    <Dialog open={open}>
+      {/* <DialogTitle>Add new todo</DialogTitle> */}
+      {/* <div>Lala</div> */}
+      <div className="formBox">
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="titleText">Add new todo</div>
+              <TextField
+                id="standard-required"
+                required
+                label="Description"
+                className="textField"
+                defaultValue="Go shopping"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <TextField
+                id="standard-required"
+                label="Date"
+                className="textField"
+                onChange={(e) => setDate(e.target.value)}
+              />
+              <TextField
+                id="standard-required"
+                label="Time"
+                className="textField"
+                onChange={(e) => setTime(e.target.value)}
+              />
+              <TextField
+                id="standard-required"
+                label="Location"
+                className="textField"
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              <TextField
+                id="standard-required"
+                label="Priority"
+                className="textField"
+                onChange={(e) => setPriority(e.target.value)}
+              />
+              <TextField
+                id="standard-required"
+                label="Tag"
+                className="textField"
+                onChange={(e) => setTag(e.target.value)}
+              />
+              <div className="button">
+                <Button
+                  variant="contained"
+                  className={classes.primaryButton}
+                  type="submit"
+                >
+                  Add new
+                </Button>
+              </div>
+            </form>
+          </div>
+    </Dialog>
+  );
+}
+
+function Dashboard(props) {
+
+  const { token, getUserAction, getUserTodosAction, userTodos, user, createTodoAction } = props;
 
   useEffect(() => {
     let decrypted = JSON.parse(atob(token.split('.')[1]));
@@ -41,6 +142,16 @@ function Dashboard({ token, getUserAction, getUserTodosAction, userTodos, user }
     },
   }));
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyles();
   const [completedStyle, setCompletedStyle] = useState(false);
   const toggleCompleted = () => {
@@ -57,9 +168,11 @@ function Dashboard({ token, getUserAction, getUserTodosAction, userTodos, user }
             <Button
                   variant="contained"
                   className={classes.primaryButton}
+                  onClick={handleClickOpen}
                 >
                   add todo
             </Button>
+            <SimpleDialog open={open} onClose={handleClose} user={user} createTodoAction={createTodoAction} />
             </div>
             {userTodos?.data?.map((todo) => (
                 <div key={todo?.id} className={completedStyle ? "taskDiv taskDivCompleted" : "taskDiv taskDivIncompleted"} onClick={toggleCompleted}>
@@ -90,6 +203,7 @@ function Dashboard({ token, getUserAction, getUserTodosAction, userTodos, user }
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getUserAction: getUser,
   getUserTodosAction: getUserTodos,
+  createTodoAction: createTodo,
 }, dispatch);
 
 const mapStateToProps = (state) => ({

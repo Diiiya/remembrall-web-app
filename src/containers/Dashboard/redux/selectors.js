@@ -58,3 +58,17 @@ export const userTodosSelector = createSelector(
     return get(substate, 'userTodos');
   }
 );
+
+/**
+*  Create todo result selector
+*/
+export const todoCreateSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    const type = get(substate, 'type');
+    if (type === "CREATE_TODO_SUCCESS") {
+      return true;
+    }
+    return false;
+  }
+);

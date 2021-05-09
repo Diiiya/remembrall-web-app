@@ -4,7 +4,9 @@ import {
   USER_UPDATED_ERROR, 
   DELETE_USER_SUCCESS, 
   DELETE_USER_ERROR,
-  SET_USER_TODOS
+  SET_USER_TODOS,
+  CREATE_TODO_SUCCESS,
+  CREATE_TODO_ERROR
  } from "./constants";
 
 const initialState = {
@@ -21,6 +23,8 @@ export default (state = initialState, action) => {
     case USER_UPDATED_ERROR:
     case DELETE_USER_SUCCESS:
     case DELETE_USER_ERROR:
+    case CREATE_TODO_SUCCESS:
+    case CREATE_TODO_ERROR:
       const { type } = action;
       return { ...state, type };
     case SET_USER_TODOS:

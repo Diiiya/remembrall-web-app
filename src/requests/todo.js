@@ -11,3 +11,15 @@ export function requestGetUserTodos(userId, token) {
     },
   });
 }
+
+export function requestCreateTodo(fkUserId, description, date, time, location, priority, fkTagId) {
+  return axios.request({
+    method: "post",
+    url: "https://localhost:5001/todos",
+    headers: {
+    Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    data: {fkUserId, description, date, time, location, priority, fkTagId}
+  });
+}

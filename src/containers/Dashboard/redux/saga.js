@@ -1,7 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { setUser, setUserTodos } from "./actions";
 import { requestGetUser, requestUpdateUser, requestDeleteUser } from "../../../requests/user";
-import { requestGetUserTodos } from "../../../requests/todo";
+import { requestGetUserTodos, requestCreateTodo } from "../../../requests/todo";
 
 import { takeLatest } from "redux-saga/effects";
 import { 
@@ -13,7 +13,9 @@ import {
   DELETE_USER_SUCCESS, 
   DELETE_USER_ERROR,
   GET_USER_TODOS,
-  SET_USER_TODOS
+  CREATE_TODO,
+  CREATE_TODO_SUCCESS,
+  CREATE_TODO_ERROR
  } from "./constants";
 
 export function* watcherSaga() {
@@ -21,6 +23,7 @@ export function* watcherSaga() {
   yield takeLatest(UPDATE_USER, handleUpdateUser);
   yield takeLatest(DELETE_USER, handleDeleteUser);
   yield takeLatest(GET_USER_TODOS, handleGetUserTodos);
+  yield takeLatest(CREATE_TODO, handleCreateTodo);
 }
 
 export function* handleGetUser({ userId, token }) {
@@ -58,5 +61,14 @@ export function* handleGetUserTodos({ userId, token }) {
     yield put(setUserTodos(response));
   } catch (error) {
     console.log(error);
+  }
+}
+
+export function* handleCreateTodo({ userId, description, date, time, location, priority, tag }) {
+  try {
+    const response = yield call(requestCreateTodo, userId, description, date, time, location, priority, tag);
+    yield put({ type: CREATE_TODO_SUCCESS, response });
+  } catch (error) {
+    yield put({ CREATE_TODO_ERROR, error });
   }
 }
