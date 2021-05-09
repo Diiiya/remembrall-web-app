@@ -1,4 +1,4 @@
-import { GET_USER, SET_USER, UPDATE_USER, DELETE_USER } from "./constants";
+import { GET_USER, SET_USER, UPDATE_USER, DELETE_USER, GET_USER_TODOS, SET_USER_TODOS } from "./constants";
 
 export const getUser = (userId, token) => ({
   type: GET_USER,
@@ -24,4 +24,15 @@ export const deleteUser = (userId, token) => ({
   type: DELETE_USER,
   userId,
   token
+});
+
+export const getUserTodos = (userId, token) => ({
+  type: GET_USER_TODOS,
+  userId,
+  token
+});
+
+export const setUserTodos = (userTodos) => ({
+  type: SET_USER_TODOS,
+  userTodos,
 });

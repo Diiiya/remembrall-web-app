@@ -15,6 +15,7 @@
   text-transform: capitalize;
   font-family: "Brush Script MT", cursive;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .avatar {
