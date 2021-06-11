@@ -23,6 +23,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 import "fontsource-roboto";
+import allTodosIcon from "../../resources/images/all.png";
+import todayTodosIcon from "../../resources/images/today.png";
+import monthTodosIcon from "../../resources/images/month.png";
+import yearTodosIcon from "../../resources/images/year.png";
 import "./App.css";
 
 function App() {
@@ -65,34 +69,34 @@ function App() {
       onKeyDown={toggleDrawer(false)}      
     >
       <List>
-        <ListItem button key={"All tasks"}>
+        <ListItem button key={"Today"}>
           <ListItemIcon>
-            <InboxIcon />
+            <img className="icon" alt="" src={todayTodosIcon} />
           </ListItemIcon>
           <ListItemText primary={"Today"} />
         </ListItem>
-        <ListItem button key={"All tasks"}>
+        {/* <ListItem button key={"Week"}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary={"This week"} />
-        </ListItem>
-        <ListItem button key={"All tasks"}>
+        </ListItem> */}
+        <ListItem button key={"Month"}>
           <ListItemIcon>
-            <InboxIcon />
+            <img className="icon" alt="" src={monthTodosIcon} />
           </ListItemIcon>
           <ListItemText primary={"This month"} />
         </ListItem>
       </List>
-      <ListItem button key={"All tasks"}>
+      <ListItem button key={"Year"}>
           <ListItemIcon>
-            <InboxIcon />
+            <img className="icon" alt="" src={yearTodosIcon} />
           </ListItemIcon>
           <ListItemText primary={"This year"} />
       </ListItem>
-      <ListItem button key={"All tasks"}>
+      <ListItem button key={"All"}>
           <ListItemIcon>
-            <InboxIcon />
+            <img className="icon" alt="" src={allTodosIcon} />
           </ListItemIcon>
           <ListItemText primary={"All"} />
       </ListItem>

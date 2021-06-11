@@ -35,6 +35,11 @@
   );
 }
 
+.icon {
+  height: 25px;
+  width: 25px;
+}
+
 .wrapper {
   height: 93%;
   display: flex;

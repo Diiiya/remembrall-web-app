@@ -21,6 +21,12 @@
     margin-bottom: 30px;
 }
 
+.todosDiv {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 550px;
+}
+
 .dashboardHeader {
     display: flex;
     justify-content: space-between;
@@ -70,6 +76,7 @@
     color: whitesmoke;
     font-weight: 600;
     padding-top: 4px;
+    cursor: pointer;
 }
 
 .inactiveCircle {
@@ -90,6 +97,22 @@
 
 .taskDoneCircle {
     background-color: #00BF00;
+}
+
+.timeDiv {
+    margin-top: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addTimeLabel {
+    margin-right: 15px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+    color: #28606A;
+    cursor: pointer;
 }
 
 .time {
@@ -119,4 +142,28 @@
 
 .taskDoneDescription {
     text-decoration: line-through;
+}
+
+.actionsDiv {
+    cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
 }

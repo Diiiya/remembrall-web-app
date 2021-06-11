@@ -1,0 +1,16 @@
+.tagNameField {
+    width: 183px;
+    margin-right: 10px;
+}
+
+.addTagDiv {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.buttonsDivTag {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}

@@ -13,7 +13,7 @@ export default function useToken() {
   );
 
   async function saveToken(userToken) {
-    var tokenValue = userToken.createdToken;
+    var tokenValue = userToken;
     if (isJWTToken.test(tokenValue)) {
       localStorage.setItem("token", tokenValue);
       setToken(userToken.createdToken);
