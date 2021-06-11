@@ -1,0 +1,34 @@
+export const GET_USER = "GET_USER";
+export const SET_USER = "SET_USER";
+
+export const UPDATE_USER = "UPDATE_USER";
+export const USER_UPDATED_SUCCESS = "USER_UPDATED_SUCCESS";
+export const USER_UPDATED_ERROR = "USER_UPDATED_ERROR";
+
+export const DELETE_USER = "DELETE_USER";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
+
+export const GET_USER_TODOS = "GET_USER_TODOS";
+export const SET_USER_TODOS = "SET_USER_TODOS";
+
+export const CREATE_TODO = "CREATE_TODO";
+export const CREATE_TODO_SUCCESS = "CREATE_TODO_SUCCESS";
+export const CREATE_TODO_ERROR = "CREATE_TODO_ERROR";
+
+export const DO_TODO = "DO_TODO";
+export const DO_TODO_SUCCESS = "DO_TODO_SUCCESS";
+export const DO_TODO_ERROR = "DO_TODO_ERROR";
+
+export const DELETE_TODO = "DELETE_TODO";
+export const DELETE_TODO_SUCCESS = "DELETE_TODO_SUCCESS";
+export const DELETE_TODO_ERROR = "DELETE_TODO_ERROR";
+
+export const GET_USER_TAGS = "GET_USER_TAGS";
+export const SET_USER_TAGS = "SET_USER_TAGS";
+
+export const CREATE_TAG = "CREATE_TAG";
+export const CREATE_TAG_SUCCESS = "CREATE_TAG_SUCCESS";
+export const CREATE_TAG_ERROR = "CREATE_TAG_ERROR";
+
+export const RESET_TYPE = "RESET_TYPE";

@@ -1,44 +1,149 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Router,
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 
+import UserMenu from "../../components/UserMenu/index";
+import ProtectedRoute from "../../components/ProtectedRoute/index";
 import Login from "../Login/index";
 import Dashboard from "../Dashboard/index";
+import Settings from "../Settings/index";
 import useToken from "./useToken";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import "fontsource-roboto";
+import allTodosIcon from "../../resources/images/all.png";
+import todayTodosIcon from "../../resources/images/today.png";
+import monthTodosIcon from "../../resources/images/month.png";
+import yearTodosIcon from "../../resources/images/year.png";
 import "./App.css";
 
 function App() {
-  const { token, setToken } = useToken();
+  const history = useHistory();
+  const { token, setToken, removeToken } = useToken();
 
-  console.log("tokenVaal: ", token);
+  const showUserMenu = () => {
+    if (token) {
+      history.push("/dashboard");
+      return <UserMenu removeToken={removeToken} token={token} />;
+    }
+    return null;
+  };
 
-  if (!token) {
-    return (
-      <div className="body">
-        <div className="headerDiv">
-          <div className="headerTitle"> Remembrall </div>
-        </div>
-        <Login setToken={setToken} />
-        <div className="footerDiv">
-          <div className="footerText"> Footer </div>
-        </div>
-      </div>
-    );
-  }
+  const useStyles = makeStyles({
+    list: {
+      width: 250,
+      // top: "50px", // not in consideration
+    },
+  });
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setIsOpen(open);
+  };
+
+  const classes = useStyles();
+  const list = () => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}      
+    >
+      <List>
+        <ListItem button key={"Today"}>
+          <ListItemIcon>
+            <img className="icon" alt="" src={todayTodosIcon} />
+          </ListItemIcon>
+          <ListItemText primary={"Today"} />
+        </ListItem>
+        {/* <ListItem button key={"Week"}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"This week"} />
+        </ListItem> */}
+        <ListItem button key={"Month"}>
+          <ListItemIcon>
+            <img className="icon" alt="" src={monthTodosIcon} />
+          </ListItemIcon>
+          <ListItemText primary={"This month"} />
+        </ListItem>
+      </List>
+      <ListItem button key={"Year"}>
+          <ListItemIcon>
+            <img className="icon" alt="" src={yearTodosIcon} />
+          </ListItemIcon>
+          <ListItemText primary={"This year"} />
+      </ListItem>
+      <ListItem button key={"All"}>
+          <ListItemIcon>
+            <img className="icon" alt="" src={allTodosIcon} />
+          </ListItemIcon>
+          <ListItemText primary={"All"} />
+      </ListItem>
+    </div>
+  );
 
   return (
     <div className="body">
       <div className="headerDiv">
-        <div className="headerTitle"> Remembrall </div>
+        <div className="headerTitle" onClick={toggleDrawer(true)}> Remembrall </div>
+        <Drawer open={isOpen} onClose={toggleDrawer(false)}>
+          {list()}
+        </Drawer>
+        {showUserMenu()}
       </div>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <div className="wrapper">        
+        <Router history={history}>
+          <Switch>
+            {/* Public routes */}
+            <Redirect from="/" to="/login" exact />
+            <Route path="/login" exact>
+              <Login setToken={setToken} />
+            </Route>
+
+            {/* Routes requiring JWT auth */}
+            <ProtectedRoute
+              path="/dashboard"
+              exact
+              component={Dashboard}
+              token={token}
+            />
+            <ProtectedRoute
+              path="/settings"
+              exact
+              component={Settings}
+              token={token}
+              removeToken={removeToken}
+            />
+
+            {/* All other routes */}
+            <Route path="*" component={() => "404 NOT FOUND"} />
+          </Switch>
+        </Router>
+      </div>
+      <div className="footerDiv">
+        <div className="footerText"> Footer </div>
+      </div>
     </div>
   );
 }
