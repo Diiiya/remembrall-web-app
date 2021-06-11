@@ -93,8 +93,10 @@ function Settings(props) {
       setTimeout(function() {
         removeToken();
       }, 5000);
-    } else if (isDeleteSuccessful === false) { setActionResponse("Sorry, an error has occurred! Please try again.");
-      handleClickOpen(); }
+    } else if (isDeleteSuccessful === false) { 
+      setActionResponse("Sorry, an error has occurred! Please try again.");
+      handleClickOpen(); 
+    }
   }
   }, [isDeleteSuccessful]);
 
@@ -200,8 +202,8 @@ function Settings(props) {
       <Grid item xs={12} sm={3}>
         <div>
           <h2>Settings</h2>
-          <div className="formBox">
-            <form className="form" onSubmit={handleSubmit}>
+          <div className="settingsFormBox">
+            <form className="settingsForm" onSubmit={handleSubmit}>
               <div className="titleText">Update profile</div>
               <TextField
                 id="standard-required"

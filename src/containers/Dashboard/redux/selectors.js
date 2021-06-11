@@ -72,3 +72,69 @@ export const todoCreateSelector = createSelector(
     return false;
   }
 );
+
+/**
+*  Create todo result selector
+*/
+export const todoDoneSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    const type = get(substate, 'type');
+    if (type === "DO_TODO_SUCCESS") {
+      return true;
+    }
+    return false;
+  }
+);
+
+/**
+*  Delete User result selector
+*/
+export const todoDeleteSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    const type = get(substate, 'type');
+    if (type === "DELETE_TODO_SUCCESS") {
+      return true;
+    }
+    return false;
+  }
+);
+
+/**
+*  Get User tags selector
+*/
+export const userTagsSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    return get(substate, 'userTags');
+  }
+);
+
+/**
+*  Create tag result selector
+*/
+export const tagCreateSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    const type = get(substate, 'type');
+    if (type === "CREATE_TAG_SUCCESS") {
+      return true;
+    }
+    return false;
+  }
+);
+
+// /**
+// *  Create todo result selector
+// */
+// export const resetSelector = createSelector(
+//   selectUserDomain,
+//   (substate) => {
+//     const type = get(substate, 'type');
+//     if (type === "DO_TODO_SUCCESS") {
+//       return true;
+//     }
+//     return false;
+//   }
+// );

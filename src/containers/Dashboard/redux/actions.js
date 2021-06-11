@@ -5,7 +5,13 @@ import {
   DELETE_USER, 
   GET_USER_TODOS, 
   SET_USER_TODOS,
-  CREATE_TODO
+  CREATE_TODO,
+  DO_TODO,
+  GET_USER_TAGS,
+  SET_USER_TAGS,
+  CREATE_TAG,
+  DELETE_TODO,
+  RESET_TYPE,
 } from "./constants";
 
 export const getUser = (userId, token) => ({
@@ -45,13 +51,48 @@ export const setUserTodos = (userTodos) => ({
   userTodos,
 });
 
-export const createTodo = (userId, description, date, time, location, priority, tag) => ({
+export const createTodo = (userId, description, dateTime, location, priority, tag, token) => ({
   type: CREATE_TODO,
   userId,
   description, 
-  date, 
-  time, 
+  dateTime: dateTime ? dateTime : "0001-01-01T00:00:00+00:00",
   location, 
   priority, 
-  tag
+  tag,
+  token
 });
+
+export const patchTodo = (todoId, token) => ({
+  type: DO_TODO,
+  todoId,
+  token,
+});
+
+export const deleteTodo = (todoId, token) => ({
+  type: DELETE_TODO,
+  todoId,
+  token
+});
+
+export const getUserTags = (userId, token) => ({
+  type: GET_USER_TAGS,
+  userId,
+  token
+});
+
+export const setUserTags = (userTags) => ({
+  type: SET_USER_TAGS,
+  userTags,
+});
+
+export const createTag = (userId, tagName, tagColor, token) => ({
+  type: CREATE_TAG,
+  userId,
+  tagName, 
+  tagColor,
+  token
+});
+
+export const resetTypeValue = () => ({
+  type: RESET_TYPE
+})
